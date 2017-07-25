@@ -1,7 +1,7 @@
 <template>
 	<div class="showAudio">
 		<div class="audio-container">
-      <my-audio v-for="(list, index) of lists"
+      <my-audio v-for="(list, index) in lists"
                   :source="list.source"
                   :index="index"
                   :mode="mode"
@@ -10,12 +10,13 @@
                   @pause="pause"
                   @ended="ended"
                   @waiting="waiting"
-                  @error="error">
+                  @error="error"
+                  :key="index">
         <div class="player">
           <svg class="progress" :width="svgOptions.width" :height="svgOptions.height">
             <path :fill="svgOptions.fill" :stroke="svgOptions.stroke" :stroke-width="svgOptions.strokeWidth"></path>
           </svg>
-          <a class="play" href="javascript:void(0)">
+          <a class="play" href="javascript:;">
           </a>
         </div>
       </my-audio>

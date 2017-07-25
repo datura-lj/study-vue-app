@@ -1,11 +1,17 @@
 <template>
   <div class="hello">
+    <h3>{{ $store.state.num }}b</h3>
+    <h4>{{count}}a</h4>
+    <button @click="$store.commit('add')">加一个</button>
+    <button type="button" name="buttonAdd" @click="add">add</button>
+    <button type="button" name="buttonAdd" @click="addPlus">addPlus</button>
     <markdown></markdown>
   </div>
 </template>
 
 <script>
 import markdown from './markdown'
+import {mapState,mapMutations,mapGetters,mapActions} from 'vuex'
 export default {
   name: 'hello',
   data () {
@@ -17,9 +23,22 @@ export default {
 </code></pre>`
     }
   },
+  computed:{
+    ...mapGetters({
+      count:'num'
+    })
+  },
   components: {
       markdown
   },
+  methods:{
+    ...mapMutations([
+       'add',
+     ]),
+     ...mapActions([
+       'addPlus',
+     ]),
+  }
 }
 </script>
 
