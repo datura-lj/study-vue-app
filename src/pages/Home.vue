@@ -1,5 +1,6 @@
 <template>
 	<div class="home">
+    <my-header></my-header>
     <loading v-if="loading.state" :loadingText="loading.text"></loading>
 		<h2>vue</h2>
 		<left-tab :leftTabData="leftTabData"></left-tab>
@@ -7,9 +8,11 @@
 	</div>
 </template>
 <script>
+import Header from '../components/header/Header'
 import NavTab from '../components/navtools/Navtab'
 import LeftTab from '../components/navtools/LeftTabBar'
 import Loading from '../components/loading/Loading'
+
 export default {
 	data(){
 		return{
@@ -33,7 +36,8 @@ export default {
 	components: {
 		'nav-tools': NavTab,
 		'left-tab': LeftTab,
-    'loading': Loading
+    'loading': Loading,
+    'my-header': Header
 	}
 }
 </script>

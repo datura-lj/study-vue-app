@@ -121,9 +121,9 @@ export default {
   	#menu{
   		width: 50px;
   		height: 50px;
-  		position: fixed;
-  		left: 0; 
-  		top: 0; 
+  		position: absolute;
+  		left: 0.05rem; 
+  		top: 0.05rem; 
   		transform: rotate(180deg);
   	}
 		#menu_list{
