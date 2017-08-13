@@ -17,7 +17,7 @@ export default{
 		height: 100%;
 		background-color: aqua;
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
 	}
 </style>
