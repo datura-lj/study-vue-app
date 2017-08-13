@@ -13,67 +13,7 @@
 	</div>
 </template>
 <script>
-function toMove(obj,delay,bType){
-	if(obj.timer){
-		clearTimeout(obj.timer);
-	}
-	obj.timer=setTimeout(function(){
-		if(bType){		
-			var oXY=getXY(obj.deg,150);
-			setCss(obj,{
-				$Transition:"0.3s all ease-in",
-				left:-Math.round(oXY.x*1.1)+"px",
-				top:-Math.round(oXY.y*1.1)+"px",
-				$Transform:"rotate(-360deg)"
-			});
-			obj.timer=setTimeout(function(){
-				setCss(obj,{
-					$Transition:"0.1s all ease-in-out",
-					left:-Math.round(oXY.x*0.9)+"px",
-					top:-Math.round(oXY.y*0.9)+"px"
-				});
-				obj.timer=setTimeout(function(){
-					setCss(obj,{
-						$Transition:"0.05s all ease",
-						left:-Math.round(oXY.x)+"px",
-						top:-Math.round(oXY.y)+"px"
-					});	
-				},105);
-			},305);			
-		}else{
-			setCss(obj,{
-				MozTransition:"0.4s -moz-transform linear,0.3s 0.35s left ease,0.3s 0.35s top ease",
-				OTransition:"0.3s 0.35s left ease,0.3s 0.35s top ease,0.4s -o-transform linear",
-				WebkitTransition:"0.3s 0.35s left ease,0.3s 0.35s top ease,0.4s -webkit-transform linear",
-				left:"0px",
-				top:"0px",
-				$Transform:"rotate(0deg)"
-			});	
-		}
-	},delay);
-}
-function setCss(obj,oAttr){
-	var sName="";
-	var aName=["Webkit","Moz","O"];
-	for(sName in oAttr){
-		if(sName.charAt(0)==="$"){
-			for(var i=0;i<aName.length;i++){
-				obj.style[aName[i]+sName.substring(1)]=oAttr[sName];
-			}
-			obj.style[sName.substring(1)]=oAttr[sName];
-		}else{
-			obj.style[sName]=oAttr[sName];
-		}
-	}
-}
-function getXY(iDeg,iRadius){
-	if(iDeg==0){
-		return {x:0,y:iRadius};
-	}else if(iDeg==90){
-		return {x:iRadius,y:0};
-	}
-	return {x:Math.sin(iDeg*Math.PI/180)*iRadius,y:Math.cos(iDeg*Math.PI/180)*iRadius};
-}
+
 export default {
 	name: 'navtab',
 	data(){
@@ -82,6 +22,67 @@ export default {
 		}
 	},
 	mounted(){
+		function toMove(obj,delay,bType){
+			if(obj.timer){
+				clearTimeout(obj.timer);
+			}
+			obj.timer=setTimeout(function(){
+				if(bType){		
+					var oXY=getXY(obj.deg,150);
+					setCss(obj,{
+						$Transition:"0.3s all ease-in",
+						left:-Math.round(oXY.x*1.1)+"px",
+						top:-Math.round(oXY.y*1.1)+"px",
+						$Transform:"rotate(-360deg)"
+					});
+					obj.timer=setTimeout(function(){
+						setCss(obj,{
+							$Transition:"0.1s all ease-in-out",
+							left:-Math.round(oXY.x*0.9)+"px",
+							top:-Math.round(oXY.y*0.9)+"px"
+						});
+						obj.timer=setTimeout(function(){
+							setCss(obj,{
+								$Transition:"0.05s all ease",
+								left:-Math.round(oXY.x)+"px",
+								top:-Math.round(oXY.y)+"px"
+							});	
+						},105);
+					},305);			
+				}else{
+					setCss(obj,{
+						MozTransition:"0.4s -moz-transform linear,0.3s 0.35s left ease,0.3s 0.35s top ease",
+						OTransition:"0.3s 0.35s left ease,0.3s 0.35s top ease,0.4s -o-transform linear",
+						WebkitTransition:"0.3s 0.35s left ease,0.3s 0.35s top ease,0.4s -webkit-transform linear",
+						left:"0px",
+						top:"0px",
+						$Transform:"rotate(0deg)"
+					});	
+				}
+			},delay);
+		}
+		function setCss(obj,oAttr){
+			var sName="";
+			var aName=["Webkit","Moz","O"];
+			for(sName in oAttr){
+				if(sName.charAt(0)==="$"){
+					for(var i=0;i<aName.length;i++){
+						obj.style[aName[i]+sName.substring(1)]=oAttr[sName];
+					}
+					obj.style[sName.substring(1)]=oAttr[sName];
+				}else{
+					obj.style[sName]=oAttr[sName];
+				}
+			}
+		}
+		function getXY(iDeg,iRadius){
+			if(iDeg==0){
+				return {x:0,y:iRadius};
+			}else if(iDeg==90){
+				return {x:iRadius,y:0};
+			}
+			return {x:Math.sin(iDeg*Math.PI/180)*iRadius,y:Math.cos(iDeg*Math.PI/180)*iRadius};
+		}
 		var oBtn=document.getElementById("home");
 		var aMenus=document.getElementById("menu_list").getElementsByTagName("img");
 		oBtn.off=true;
@@ -117,14 +118,13 @@ export default {
 </script>
 <style lang='scss' rel="stylesheet/scss" type="text/css" scoped>
   .navtab{
-  	height: 100%;
-  	overflow: hidden;
   	#menu{
   		width: 50px;
   		height: 50px;
   		position: fixed;
-  		right: 20px; 
-  		bottom:20px; 
+  		left: 0; 
+  		top: 0; 
+  		transform: rotate(180deg);
   	}
 		#menu_list{
 			height: 42px;
